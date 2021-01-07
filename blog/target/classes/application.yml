@@ -1,0 +1,27 @@
+spring:
+  thymeleaf:
+    mode: HTML
+    suffix: .html
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/MyBlog?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=CST
+    username: root
+    password: 123
+  jpa:
+    hibernate:
+      #更新表的时候没表，才想起来之前这块不知道为什么标黄了
+      ddl-auto: update
+    show-sql: true
+  messages:
+    basename: i18n/messages
+
+server:
+  port: 80
+
+logging:
+  level:
+    root: info
+    com.lrm: debug
+  file: log/blog.log
+
+comment.avatar: /images/commentAvatar.jpg

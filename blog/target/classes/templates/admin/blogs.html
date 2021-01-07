@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--页面缩放比例-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客管理与搜索</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css"/>
+    <link rel="stylesheet" href="../../static/css/me.css"/>
+</head>
+<body>
+    <!--导航-->
+    <nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini" >
+        <div class="ui container">
+            <!--stackable意为可折叠，在手机端也能比例正常的显示-->
+            <div class="ui inverted  secondary stackable menu">
+                <h2 class="ui teal header item">管理后台</h2>
+            <!--定义m-item使这块的东西具有独特属性，方便script获取-->
+                <a href="#" class="active m-item item m-mobile-hide"><i class="mini home icon"></i> 首页</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i> 分类</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i> 标签</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown item">
+                        <div class="text">
+                            <img class="ui avatar image" src="../../static/images/abcd.png">
+                            枫华
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="#" class="item">注销</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--menu toggle 后续拿到button按钮-->
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" th:href="@{/admin/blogs/input}" class=" item">发布</a>
+                <a href="#" th:href="@{/admin/blogs}" class="active item">列表</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!--中间内容-->
+    <div class="m-container-small m-padded-tb-large">
+        <div class="ui m-container">
+            <div class="ui secondary segment form">
+                <input type="hidden" name="page">
+                <div class="inline fields">
+                    <div class="field">
+                        <input type="text" name="title" placeholder="标题">
+                    </div>
+                    <div class="field">
+                        <div class="ui labeled action input">
+                            <div class="ui type selection dropdown">
+                                <input type="hidden" name="typeId">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">分类</div>
+                                <!--显示分类-->
+                                <div class="menu">
+                                    <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">错误日志</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="clear-btn" class="ui button">clear</button>
+<!--                        怎么清除标题 分类 和标签?-->
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" id="recommend" name="recommend">
+                            <label for="recommend">推荐</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>搜索</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 给它贴上 一个标签，说明只刷新这部分-->
+            <div id="table-container">
+                <table th:fragment="blogList" class="ui compact teal table">
+                    <thead>
+                    <!--在pageable对象中的content属性拿到blog列表-->
+                    <tr>
+                        <th></th>
+                        <th>标题</th>
+                        <th>类型</th>
+                        <th>推荐</th>
+                        <th>状态</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="blog, iterStat : ${page.content}">
+                        <td th:text="${iterStat.count}">1</td>
+                        <td th:text="${blog.title}">博客设计</td>
+                        <td th:text="${blog.type.name}">程序语言</td>
+                        <td th:text="${blog.recommend}? '是' : '否'">是</td>
+                        <td th:text="${blog.published}? '发布' : '草稿'">草稿</td>
+<!--                        直接在这里改-->
+                        <td th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd hh:MM:ss')}">2020-8-1 09:45</td>
+                        <td>
+                            <!--把字装在按钮样式里 用class=xx button -->
+                            <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal button">编辑</a>
+<!--                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red mini button">删除</a>-->
+                            <!--不能用<a href了 这样的话弹出层点否之后会跳转到#！-->
+                            <button type="button" class="ui red mini button" onclick="show()">删除</button>
+                            <!--button触发弹出层-->
+                            <div class="ui basic modal">
+                                <div class="ui icon header">
+                                    <i class="archive icon"></i>
+                                     <p>永久删除？</p>
+                                </div>
+                                <div class="actions">
+                                    <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red ok inverted button">
+                                        <i class="checkmark icon"></i>
+                                        yes
+                                    </a>
+                                    <a href="#" th:href="@{/admin/blogs}" class="ui green ok inverted button">
+                                        <i class="remove icon"></i>
+                                        no
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="7">
+                            <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                                <!--和之前的翻页不同，这里不能传递所输入的筛选条件的那个参数 这样你翻页，因为没那个参数，下一页的page应该是全部的blog了吧！
+                                所以不能这样用th:href="..."传参、跳转。
+                                为什么不用form表单 post传？ 可能因为这样太麻烦 因为从这里传的话 跟form表单中的要查询的名称、是否推荐 合并 url看起来很复杂 不好看-->
+                                <!-- page(this) 参数为相应对象调用page方法 翻页的时候 对象就是page 因为是先搜索的 这时使用的就是page对象 这个data-page是page属性值？-->
+                                <a onclick="page(this)" th:attr="data-page=${page.number}-1" class=" item" th:unless="${page.first}">上一页</a>
+                                <a onclick="page(this)" th:attr="data-page=${page.number}+1" class=" item" th:unless="${page.last}">下一页</a>
+                            </div>
+                            <a href="#" th:href="@{/admin/blogs/input}"  class="ui mini right floated teal basic button">新增</a>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+                <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                    <i class="close icon"></i>
+                    <div class="header">提示:</div>
+                    <p th:text="${message}">恭喜, 操作成功!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!--底部footer-->
+    <footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../../static/images/adaw.jpg" class="ui rounded image" alt="" style="width: 100px">
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">My JavaSE Notes</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">用户故事</a>
+                        <a href="#" class="item">用户故事</a>
+                        <a href="#" class="item">用户故事</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">My Matlab Notes</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">用户故事</a>
+                        <a href="#" class="item">用户故事</a>
+                        <a href="#" class="item">用户故事</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Contact Me</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">QQ:2270517836</p>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">Email:a7858833@bupt.edu.cn</p>
+                </div>
+            </div>
+                <div class="ui inverted section divider"></div>
+                <p class="m-text-thin m-text-spaced m-text-lined m-opacity-mini">Hi, it's me.</p>
+            </div>
+    </footer>
+    <!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <!--/*/</th:block>/*/-->
+<!--如果有，点击一下按钮就没了，没用点击一下就有了-->
+ <script>
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    // onclick嵌套show函数就可以了!!!!!如果不在函数里通过function点击的话 页面一加载就会触发
+    function show()
+    {
+        $('.ui.basic.modal')
+        .modal('show')
+    ;
+    }
+
+    $('.ui.dropdown').dropdown({
+        on:'hover'
+    });
+
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function (){
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
+    //拿到data-page的值
+    function page(obj) {
+        $("[name='page']").val($(obj).data("page"));
+        loaddata();
+    }
+    //按下搜索按钮后的第一步
+    $("#search-btn").click(function () {
+        //清零初始页面的页数 不然会出现：第一次搜索翻到了第二页 第二次搜索的话 可能搜出来的个数不能达到第二页 所以显示不出来
+        $("[name='page']").val(0);
+        loaddata();
+    })
+
+    $('#clear-btn')
+        .on('click', function() {
+            $('.ui.type.dropdown')
+                .dropdown('clear')
+            ;
+        })
+    ;
+
+    //按下搜索后的第二步 调用search方法 传递到有#table-container的标签的地方
+    function loaddata() {
+        $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
+            title : $("[name='title']").val(),
+            typeId : $("[name='typeId']").val(),
+            recommend : $("[name='recommend']").prop('checked'),
+            page : $("[name='page']").val()
+        });
+    }
+
+
+ </script>
+</body>
+</html>
