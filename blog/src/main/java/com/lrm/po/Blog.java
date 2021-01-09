@@ -36,13 +36,13 @@ public class Blog
     @ManyToOne
     private Type type;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany
     private List<Tag> tags = new ArrayList<>();
 
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "blog")
+    @OneToMany(mappedBy = "blog",cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 
     public Blog()

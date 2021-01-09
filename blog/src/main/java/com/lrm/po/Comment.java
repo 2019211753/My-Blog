@@ -22,7 +22,7 @@ public class Comment
     @ManyToOne
     private Blog blog;
 
-    @OneToMany(mappedBy = "parentComment")
+    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.REMOVE)
     private List<Comment> replyComments = new ArrayList<>();
 
     @ManyToOne

@@ -30,8 +30,6 @@ public class User
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
 
     @OneToMany(mappedBy = "user")
     private List<Blog> blogs = new ArrayList<>();
@@ -95,14 +93,6 @@ public class User
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public List<Blog> getBlogs() {
         return blogs;
     }
@@ -122,7 +112,7 @@ public class User
                 ", type=" + type +
                 ", email='" + email + '\'' +
                 ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
+                ", updateTime=" +
                 ", blogs=" + blogs +
                 '}';
     }
