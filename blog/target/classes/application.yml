@@ -2,6 +2,7 @@ spring:
   thymeleaf:
     mode: HTML
     suffix: .html
+    cache: false
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/MyBlog?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=CST

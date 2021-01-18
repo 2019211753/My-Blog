@@ -111,7 +111,7 @@
                         <td>
                             <!--把字装在按钮样式里 用class=xx button -->
                             <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal button">编辑</a>
-<!--                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red mini button">删除</a>-->
+                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red mini button">删除</a>
                             <!--不能用<a href了 这样的话弹出层点否之后会跳转到#！-->
 <!--                            <button type="button" class="ui red mini button" onclick="show()">删除</button>-->
 <!--                            &lt;!&ndash;button触发弹出层&ndash;&gt;-->
@@ -212,12 +212,12 @@
     });
 
     // onclick嵌套show函数就可以了!!!!!如果不在函数里通过function点击的话 页面一加载就会触发
-    function show()
-    {
-        $('.ui.basic.modal')
-        .modal('show')
-    ;
-    }
+    // function show()
+    // {
+    //     $('.ui.basic.modal')
+    //     .modal('show')
+    // ;
+    // }
 
     $('.ui.dropdown').dropdown({
         on:'hover'
