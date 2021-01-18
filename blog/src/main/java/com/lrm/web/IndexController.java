@@ -38,7 +38,7 @@ public class IndexController
     }
 
     @PostMapping("/search")
-    public String search(@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String search(@PageableDefault(size = 1000, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          @RequestParam String query, Model model)
     {
         //mysql语句 模糊查询的格式 jpa不会帮处理string前后有没有%的

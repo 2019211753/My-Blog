@@ -113,24 +113,24 @@
                             <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal button">编辑</a>
 <!--                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red mini button">删除</a>-->
                             <!--不能用<a href了 这样的话弹出层点否之后会跳转到#！-->
-                            <button type="button" class="ui red mini button" onclick="show()">删除</button>
-                            <!--button触发弹出层-->
-                            <div class="ui basic modal">
-                                <div class="ui icon header">
-                                    <i class="archive icon"></i>
-                                     <p>永久删除？</p>
-                                </div>
-                                <div class="actions">
-                                    <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red ok inverted button">
-                                        <i class="checkmark icon"></i>
-                                        yes
-                                    </a>
-                                    <a href="#" th:href="@{/admin/blogs}" class="ui green ok inverted button">
-                                        <i class="remove icon"></i>
-                                        no
-                                    </a>
-                                </div>
-                            </div>
+<!--                            <button type="button" class="ui red mini button" onclick="show()">删除</button>-->
+<!--                            &lt;!&ndash;button触发弹出层&ndash;&gt;-->
+<!--                            <div class="ui basic modal">-->
+<!--                                <div class="ui icon header">-->
+<!--                                    <i class="archive icon"></i>-->
+<!--                                     <p>永久删除？</p>-->
+<!--                                </div>-->
+<!--                                <div class="actions">-->
+<!--                                    <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red ok inverted button">-->
+<!--                                        <i class="checkmark icon"></i>-->
+<!--                                        yes-->
+<!--                                    </a>-->
+<!--                                    <a href="#" th:href="@{/admin/blogs}" class="ui green ok inverted button">-->
+<!--                                        <i class="remove icon"></i>-->
+<!--                                        no-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </td>
                     </tr>
                     </tbody>
