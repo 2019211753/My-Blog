@@ -16,8 +16,11 @@ spring:
   messages:
     basename: i18n/messages
 
+
 server:
   port: 80
+  session:
+    timeout: 10
 
 logging:
   level:

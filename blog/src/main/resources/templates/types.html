@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                             <div class="right aligned five wide column">
-                                <a href="#" target="_blank" class="ui teal basic label m-padded-tb-tiny m-text-thin" th:text="${blog.type.name}"></a>
+                                <button class="ui teal basic label m-padded-tb-tiny m-text-thin" th:text="${blog.type.name}"></button>
                             </div>
                         </div>
                     </div>
@@ -100,13 +100,15 @@
         </div>
 <!--        为什么这样可以？？？？？？？？？？？-->
         <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
-            <div class="column">
-                <a href="#" th:href="@{/types/{id}/(id = ${activeTypeId},page=${page.number}-1)}"
-                   th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
-            </div>
-            <div class="right aligned column">
-                <a href="#" th:href="@{/types/{id}/(id = ${activeTypeId},page=${page.number}+1)}"
-                   th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <a href="#" th:href="@{/types/{id}/(id = ${activeTypeId},page=${page.number}-1)}"
+                       th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                </div>
+                <div class="right aligned column">
+                    <a href="#" th:href="@{/types/{id}/(id = ${activeTypeId},page=${page.number}+1)}"
+                       th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                </div>
             </div>
         </div>
     </div>

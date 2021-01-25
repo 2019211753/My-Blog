@@ -31,7 +31,7 @@ public class IndexController
                          Model model)
     {
         model.addAttribute("page",blogService.listBlog(pageable));
-        model.addAttribute("types", typeService.listTypeTop(6));
+        model.addAttribute("types", typeService.listTypeTop(8));
         model.addAttribute("tags", tagService.listTagTop(10));
         model.addAttribute("recommendBlogs", blogService.listRecommendBlogTop(8));
         return "index" ;

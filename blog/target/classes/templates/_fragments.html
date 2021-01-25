@@ -27,7 +27,7 @@
             <div class="right m-item item m-mobile-hide">
                 <!-- inverted使能把那个小放大镜显示出来-->
                 <!--如果是post表单一定要说明method="post" 因为默认是get 会出错-->
-                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank" >
+                <form name="search" action="#" th:action="@{/search}" method="post"  >
                     <!--input用value覆盖 div用text覆盖-->
                     <div class="ui icon inverted transparent input">
                         <input type="text" name="query" placeholder="Search...."  th:value="${query}">
