@@ -137,15 +137,19 @@
                     <tfoot>
                     <tr>
                         <th colspan="7">
-                            <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                            <div class="ui middle aligned two column grid" th:if="${page.totalPages}>1">
                                 <!--和之前的翻页不同，这里不能传递所输入的筛选条件的那个参数 这样你翻页，因为没那个参数，下一页的page应该是全部的blog了吧！
                                 所以不能这样用th:href="..."传参、跳转。
                                 为什么不用form表单 post传？ 可能因为这样太麻烦 因为从这里传的话 跟form表单中的要查询的名称、是否推荐 合并 url看起来很复杂 不好看-->
                                 <!-- page(this) 参数为相应对象调用page方法 翻页的时候 对象就是page 因为是先搜索的 这时使用的就是page对象 这个data-page是page属性值？-->
-                                <a onclick="page(this)" th:attr="data-page=${page.number}-1" class=" item" th:unless="${page.first}">上一页</a>
-                                <a onclick="page(this)" th:attr="data-page=${page.number}+1" class=" item" th:unless="${page.last}">下一页</a>
+                                <div class="column">
+                                    <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="ui mini teal basic button" th:unless="${page.first}">上一页</a>
+                                    <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="ui mini teal basic button" th:unless="${page.last}">下一页</a>
+                                </div>
+                                <div class="right aligned column">
+                                    <a href="#" th:href="@{/admin/blogs/input}"  class="ui mini right floated teal basic button">新增</a>
+                                </div>
                             </div>
-                            <a href="#" th:href="@{/admin/blogs/input}"  class="ui mini right floated teal basic button">新增</a>
                         </th>
                     </tr>
                     </tfoot>

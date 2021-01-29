@@ -78,12 +78,15 @@
             <tfoot>
                 <tr>
                     <th colspan="6" >
-                        <div th:if="${page.totalPages}>1">
-                            <!--在fragments有段代码说明是从index进入，那时候page=0 -->
-                            <a th:href="@{/admin/types(page=${page.number}-1)}" class="ui mini teal basic button" th:unless="${page.first}">上一页</a>
-                            <a th:href="@{/admin/types(page=${page.number}+1)}" class="ui mini teal basic button" th:unless="${page.last}">下一页</a>
+                        <div class="ui middle aligned two column grid" th:if="${page.totalPages}>1">
+                            <div class="column">
+                                <a th:href="@{/admin/types(page=${page.number}-1)}" class="ui mini teal basic button" th:unless="${page.first}">上一页</a><a th:href="@{/admin/tags(page=${page.number}+1)}" class="ui mini teal basic button" th:unless="${page.last}">下一页</a>
+                                <a th:href="@{/admin/types(page=${page.number}+1)}" class="ui mini teal basic button" th:unless="${page.last}">下一页</a>
+                            </div>
+                            <div class="right aligned column">
+                                <a href="#" th:href="@{/admin/types/input}"  class="ui mini right floated teal basic button">新增</a>
+                            </div>
                         </div>
-                        <a href="#" th:href="@{/admin/types/input}"  class="ui mini right floated teal basic button">新增</a>
                     </th>
                 </tr>
             </tfoot>
