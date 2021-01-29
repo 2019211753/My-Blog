@@ -64,28 +64,28 @@
             </tr>
             </thead>
             <tbody>
-            <!-- page就代表controller中的pageable对象-->
-            <tr th:each="type,iterStat :  ${page.content}">
-                <td th:text="${iterStat.count}"></td>
-                <td th:text="${type.name}"></td>
-                <td>
-<!--                在这个tr th:each....type下 这个type就对应那个分类 -->
-                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal button">编辑</a>
-                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red button">删除</a>
-                </td>
-            </tr>
+                <!-- page就代表controller中的pageable对象-->
+                <tr th:each="type,iterStat :  ${page.content}">
+                    <td th:text="${iterStat.count}"></td>
+                    <td th:text="${type.name}"></td>
+                    <td>
+    <!--                在这个tr th:each....type下 这个type就对应那个分类 -->
+                        <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal button">编辑</a>
+                        <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red button">删除</a>
+                    </td>
+                </tr>
             </tbody>
             <tfoot>
-            <tr>
-                <th colspan="6" >
-                    <div class="ui pagination menu " th:if="${page.totalPages}>1">
-                        <!--在fragments有段代码说明是从index进入，那时候page=0 -->
-                        <a th:href="@{/admin/types(page=${page.number}-1)}" class=" mini item" th:unless="${page.first}">上一页</a>
-                        <a th:href="@{/admin/types(page=${page.number}+1)}" class=" mini item" th:unless="${page.last}">下一页</a>
-                    </div>
-                    <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated  teal basic button">新增</a>
-                </th>
-            </tr>
+                <tr>
+                    <th colspan="6" >
+                        <div th:if="${page.totalPages}>1">
+                            <!--在fragments有段代码说明是从index进入，那时候page=0 -->
+                            <a th:href="@{/admin/types(page=${page.number}-1)}" class="ui mini teal basic button" th:unless="${page.first}">上一页</a>
+                            <a th:href="@{/admin/types(page=${page.number}+1)}" class="ui mini teal basic button" th:unless="${page.last}">下一页</a>
+                        </div>
+                        <a href="#" th:href="@{/admin/types/input}"  class="ui mini right floated teal basic button">新增</a>
+                    </th>
+                </tr>
             </tfoot>
         </table>
     </div>

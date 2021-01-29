@@ -30,6 +30,7 @@ D:\springboot开发\My Project1\blog\src\main\java\com\lrm\dao\TagRepository.jav
 D:\springboot开发\My Project1\blog\src\main\java\com\lrm\web\IndexController.java
 D:\springboot开发\My Project1\blog\src\main\java\com\lrm\service\TagService.java
 D:\springboot开发\My Project1\blog\src\main\java\com\lrm\po\Type.java
+D:\springboot开发\My Project1\blog\src\main\java\com\lrm\vo\Test.java
 D:\springboot开发\My Project1\blog\src\main\java\com\lrm\service\TagServiceImpl.java
 D:\springboot开发\My Project1\blog\src\main\java\com\lrm\web\AboutShowController.java
 D:\springboot开发\My Project1\blog\src\main\java\com\lrm\interceptor\LoginInterceptor.java

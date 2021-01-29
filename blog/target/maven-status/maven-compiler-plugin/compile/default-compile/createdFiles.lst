@@ -26,6 +26,7 @@ com\lrm\util\MD5Utils.class
 com\lrm\service\CommentService.class
 com\lrm\po\Type.class
 com\lrm\interceptor\LoginInterceptor.class
+com\lrm\vo\Test.class
 com\lrm\po\User.class
 com\lrm\vo\BlogQuery.class
 com\lrm\po\Comment.class

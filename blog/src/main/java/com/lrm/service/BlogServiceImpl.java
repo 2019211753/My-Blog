@@ -22,13 +22,15 @@ import java.util.*;
 
 //记得添加这个注解，否则下面的autowired会报错
 @Service
-public class BlogServiceImpl implements BlogService{
+public class BlogServiceImpl implements BlogService {
+
     @Autowired
     private BlogRepository blogRepository;
 
     @Override
     public Blog getBlog(Long id) {
-        return blogRepository.findOne(id);}
+        return blogRepository.findOne(id);
+    }
 
     @Override
     public Page<Blog> listBlog(String query, Pageable pageable) {
@@ -36,17 +38,19 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    //应该是找到符合条件的Blog的意思吧？然后controller中返回了符合条件的page
-    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
-        //迷惑
-        return blogRepository.findAll(new Specification<Blog>() {
+    //找到符合条件的Blog 然后controller中返回了符合条件的page
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog)
+    {
+        return blogRepository.findAll(new Specification<Blog>()
+        {
             @Override
-            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb)
+            {
                 List<Predicate> predicates = new ArrayList<>();
                 //""是空字节，而不是null 下面这种写法 而不是blog.getTitle().equals()是防止它是null 会造成空指针异常
                 if( blog.getTitle() !=null && !"".equals(blog.getTitle()) )
                 {
-                    predicates.add(cb.like(root.<String>get("title"), "%"+blog.getTitle()+"%"));
+                    predicates.add(cb.like(root.get("title"), "%"+blog.getTitle()+"%"));
                 }
                 if( blog.getTypeId() !=null)
                 {
@@ -56,7 +60,8 @@ public class BlogServiceImpl implements BlogService{
                 {
                     predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
                 }
-                cq.where(predicates.toArray(new Predicate[predicates.size()]));
+                //参数是0么
+                cq.where(predicates.toArray(new Predicate[0]));
                 return null;
             }
         }, pageable);
@@ -69,7 +74,7 @@ public class BlogServiceImpl implements BlogService{
 
     @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
-        Sort sort = new Sort (Sort.Direction.DESC, "updateTime");
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(0,size, sort);
         return blogRepository.findTop(pageable);
     }
