@@ -122,6 +122,8 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findAll(pageable);
     }
 
+
+    //一个数据库事务由一条或者多条sql语句构成，它们形成一个逻辑的工作单元。这些sql语句要么全部执行成功，要么全部执行失败 。
     @Transactional
     @Override
     //注意 在没更改之前 编辑和新增用的都是saveBlog 结果是编辑之后 原本的createTime和view变成null了
@@ -146,8 +148,8 @@ public class BlogServiceImpl implements BlogService {
 
     @Transactional
     @Override
-    public Blog updateBlog(Long id, Blog blog) {
-        Blog b = blogRepository.findOne(id);
+    public Blog updateBlog(Blog blog) {
+        Blog b = blogRepository.findOne(blog.getId());
         if(b ==null)
         {
             throw new NotFoundException("该博客不存在");

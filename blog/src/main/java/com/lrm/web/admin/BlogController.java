@@ -102,7 +102,7 @@ public class BlogController
         {
             b = blogService.saveBlog(blog);
         } else {
-            b = blogService.updateBlog(blog.getId(), blog);
+            b = blogService.updateBlog(blog);
         }
 
         if (b == null)

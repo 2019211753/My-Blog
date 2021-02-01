@@ -10,6 +10,10 @@ public interface TagService {
 
     Tag saveTag(Tag type);
 
+    void deleteTag(Long id);
+
+    Tag updateTag(Long id, Tag type);
+
     Tag getTag(Long id);
 
     Tag getTagByName(String name);
@@ -22,7 +26,7 @@ public interface TagService {
 
     List<Tag> listTag(String ids);
 
-    Tag updateTag(Long id, Tag type);
+    List<Long> convertToList(String ids);
 
-    void deleteTag(Long id);
+
 }

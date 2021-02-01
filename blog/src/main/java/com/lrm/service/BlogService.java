@@ -27,7 +27,7 @@ public interface BlogService {
 
     Map<String, List<Blog>> archivesBlog();
 
-    Blog updateBlog(Long id, Blog blog);
+    Blog updateBlog(Blog blog);
 
     Long countBlog();
 
