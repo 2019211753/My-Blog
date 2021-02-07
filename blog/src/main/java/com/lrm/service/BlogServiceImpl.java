@@ -149,6 +149,8 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public Blog updateBlog(Blog blog) {
+        //这个b和blog不是一个对象了！！！blog里有新内容，没有view。b没新内容，但是有view，他俩id一样。所以说要不要这么做 主要看前端有没有隐含域
+        //然后把blog的新内容赋值给原来的b 并且更新时间
         Blog b = blogRepository.findOne(blog.getId());
         if(b ==null)
         {

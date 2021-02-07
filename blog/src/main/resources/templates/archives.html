@@ -60,7 +60,7 @@
                     <span>
                         <i class="mini teal circle icon"></i>
                         <span th:text="${blog.title}">java学习路线</span>
-                        <div class="ui teal basic left pointing label m-padded-tb-mini" th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">9.3</div>
+                        <div class="ui teal basic left pointing label m-padded-tb-mini" th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}">9.3</div>
                     </span>
                     <div class="ui orange basic left pointing label m-padded-tb-mini" th:text="${blog.flag}">原创</div>
                 </a>
