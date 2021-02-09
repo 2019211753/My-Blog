@@ -24,7 +24,7 @@ public class TypeShowController {
     private BlogService blogService;
 
     @GetMapping("types/{id}")
-    public String types(@PageableDefault(size =6, sort = {"updateTime"},direction = Sort.Direction.ASC)
+    public String types(@PageableDefault(size =6, sort = {"updateTime"},direction = Sort.Direction.DESC)
                         Pageable pageable, Model model, @PathVariable Long id)
     {
         List<Type> types = typeService.listTypeTop(10000);

@@ -61,7 +61,7 @@
         </div>
         <div class="ui top attached teal segment">
             <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
-                <div class="ui middle aligned mobile reversed stackable grid" >
+                <div class="ui middle aligned mobile reversed stackable grid">
                     <div class="eleven wide column">
                         <!--target...打开之后变成black-->
                         <!--为什么循环放在这个位置？-->
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                             <div class="right aligned five wide column">
-                                <button class="ui teal basic label m-padded-tb-tiny m-text-thin" th:text="${blog.type.name}"></button>
+                                <div  class="ui teal basic label m-padded-tb-tiny m-text-thin" th:text="${blog.type.name}"></div>
                             </div>
                         </div>
                     </div>
