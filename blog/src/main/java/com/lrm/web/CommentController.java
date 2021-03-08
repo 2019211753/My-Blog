@@ -38,12 +38,12 @@ public class CommentController
     {
         User user = (User)session.getAttribute("user");
         Long blogId = comment.getBlog().getId();
-        comment.setBlog(blogService.getBlog(blogId));
+//        comment.setBlog(blogService.getBlog(blogId));
         if (user !=null)
         {
             comment.setAvatar(user.getAvatar());
             comment.setAdminComment(true);
- //           comment.setNickname(user.getNickname());
+            comment.setNickname(user.getNickname());
         } else {
             comment.setAvatar(avatar);
         }
