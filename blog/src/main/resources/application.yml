@@ -21,6 +21,11 @@ server:
   port: 80
   session:
     timeout: 3600
+#  ssl:
+#    enabled: true
+#    key-store: classpath:helloblog.xyz.jks
+#    key-store-password: Yb7858833
+#    key-store-type: JKS
 
 logging:
   level:

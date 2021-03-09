@@ -1,6 +1,7 @@
 com\lrm\service\UserServiceImpl.class
 com\lrm\service\TagService.class
 com\lrm\util\MyBeanUtils.class
+com\lrm\util\Test1.class
 com\lrm\web\TagShowController.class
 com\lrm\web\admin\LoginController.class
 com\lrm\service\BlogServiceImpl$2.class
@@ -9,11 +10,13 @@ com\lrm\service\BlogServiceImpl.class
 com\lrm\service\TypeServiceImpl.class
 com\lrm\aspect\LogAspect.class
 com\lrm\po\Blog.class
+com\lrm\util\Test3.class
 com\lrm\web\admin\BlogController.class
 com\lrm\web\TypeShowController.class
 com\lrm\service\TypeService.class
 com\lrm\dao\UserRepository.class
 com\lrm\po\Tag.class
+com\lrm\util\Test2.class
 com\lrm\util\MarkdownUtils$CustomAttributeProvider.class
 com\lrm\web\IndexController.class
 com\lrm\aspect\LogAspect$RequestLog.class
@@ -21,6 +24,8 @@ com\lrm\dao\CommentRepository.class
 com\lrm\web\CommentController.class
 com\lrm\dao\BlogRepository.class
 com\lrm\service\BlogServiceImpl$1.class
+com\lrm\util\Test4.class
+com\lrm\util\Test5.class
 com\lrm\handler\ControllerExceptionHandler.class
 com\lrm\util\MD5Utils.class
 com\lrm\service\CommentService.class
@@ -39,6 +44,7 @@ com\lrm\util\MarkdownUtils.class
 com\lrm\web\AboutShowController.class
 com\lrm\util\MarkdownUtils$1.class
 com\lrm\dao\TypeRepository.class
+com\lrm\util\test.class
 com\lrm\web\admin\TypeController.class
 com\lrm\web\admin\TagController.class
 com\lrm\service\UserService.class
