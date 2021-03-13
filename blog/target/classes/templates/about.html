@@ -74,6 +74,10 @@
                 <div class="ui wechat-qr flowing popup transition hidden">
                     <img src="../static/images/wechat1.png" alt="" th:src="@{/images/wechat1.png}" class="ui rounded image" style="width:180px; height: 200px">
                 </div>
+
+                <div class="ui qq-qr flowing popup transition hidden">
+                    <img src="../static/images/qq1.png" alt="" th:src="@{/images/qq1.png}" class="ui rounded image" style="width:180px; height: 200px">
+                </div>
             </div>
         </div>
     </div>
@@ -130,15 +134,19 @@
         $('.m-item').toggleClass('m-mobile-hide');
     });
 
-    $('.qq').popup({
-        on:'hover'
-    });
 
     $('.wechat').popup({
         popup:$('.wechat-qr'),
         on:'hover',
         position:'bottom center'
     });
+
+    $('.qq').popup({
+        popup:$('.qq-qr'),
+        on:'hover',
+        position:'bottom center'
+    });
+
 </script>
 </body>
 </html>

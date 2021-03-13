@@ -106,6 +106,9 @@
                             <li>
                                 发表时间：<span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}"></span>
                             </li>
+                            <li>
+                                更新时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}"></span>
+                            </li>
                             <li>自由转载</li>
                         </ui>
                     </div>

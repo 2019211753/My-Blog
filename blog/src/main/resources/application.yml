@@ -2,7 +2,8 @@ spring:
   thymeleaf:
     mode: HTML
     suffix: .html
-    cache: true
+    #自动刷新
+    cache: false
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/MyBlog?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=CST
@@ -18,10 +19,14 @@ spring:
 
 
 server:
-  port: 80
+  port: 443
   session:
     timeout: 3600
-
+  ssl:
+    enabled: true
+    key-store: classpath:helloblog.xyz.jks
+    key-store-password: Yb7858833
+    key-store-type: JKS
 
 logging:
   level:
