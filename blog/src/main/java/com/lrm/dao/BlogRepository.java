@@ -23,9 +23,33 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
     @Query("update Blog b set b.view = b.view+1 where b.id = ?1")
     int updateViews(Long id);
 
-    @Query("select function('date_format', b.createTime, '%Y') as year from Blog b group by function('date_format', b.createTime, '%Y') order by year desc ")
+    /**
+     * 将所有博客按时间的年分割
+     * @return  顺序返回年份List集合
+     */
+    @Query("select function('date_format', b.createTime, '%Y') as year " +
+            "from Blog b  order by year desc ")
     List<String> findGroupYear();
 
-    @Query("select b from Blog  b where function('date_format', b.createTime, '%Y') = ?1 order by b desc")
-    List<Blog> findByYear(String year);
+
+    /**
+     * 查询该年份下发布过博客的所有月份
+     * @param year 需要查询的年份
+     * @return 月份的List集合
+     */
+    @Query("select function('date_format', b.createTime, '%M') as month " +
+            "from Blog b where function('date_format', b.createTime, '%Y') = ?1 " +
+            " order by month desc ")
+    List<String> findGroupMonthByYear(String year);
+
+
+    /**
+     * 按月份查询博客
+     * @param year 年份
+     * @param month 月份
+     * @return 博客的List集合
+     */
+    @Query("select b from Blog  b where function('date_format', b.createTime, '%Y') = ?1 and function('date_format', b.createTime, '%M') =?2 order by b desc")
+    List<Blog> findByYearAndMonth(String year, String month);
+
 }

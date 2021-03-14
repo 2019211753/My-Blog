@@ -1,6 +1,7 @@
 
 body {
     background: url("../images/preview.jpg");
+    /*不重复、不随滚轮变动、覆盖全屏幕*/
     background-repeat:no-repeat;
     background-attachment:fixed;
     background-size:cover;

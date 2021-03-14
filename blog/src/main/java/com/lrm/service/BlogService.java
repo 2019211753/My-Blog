@@ -25,7 +25,7 @@ public interface BlogService {
 
     List<Blog> listRecommendBlogTop(Integer size);
 
-    Map<String, List<Blog>> archivesBlog();
+    Map<String, Map<String, List<Blog>>> archivesBlog();
 
     Blog updateBlog(Blog blog);
 
