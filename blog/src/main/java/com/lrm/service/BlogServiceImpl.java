@@ -6,6 +6,7 @@ import com.lrm.po.Blog;
 import com.lrm.po.Type;
 import com.lrm.util.MarkdownUtils;
 import com.lrm.util.MyBeanUtils;
+import com.lrm.util.ProcessData;
 import com.lrm.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,11 +83,13 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Map<String, Map<String, List<Blog>>> archivesBlog() {
         List<String> years = blogRepository.findGroupYear();
-        Map<String, Map<String, List<Blog>>> map = new HashMap<>();
+        years = ProcessData.removeDupicateElement(years);
+        Map<String, Map<String, List<Blog>>> map = new HashMap<>(years.size());
         for(String year : years)
         {
-         Map<String, List<Blog>> hashMap = new HashMap<>();
-         List<String> months = blogRepository.findGroupMonthByYear(year);
+            List<String> months = blogRepository.findGroupMonthByYear(year);
+            Map<String, List<Blog>> hashMap = new HashMap<>(months.size());
+            months = ProcessData.removeDupicateElement(months);
             for (String month : months)
             {
                 hashMap.put(month, blogRepository.findByYearAndMonth(year, month));

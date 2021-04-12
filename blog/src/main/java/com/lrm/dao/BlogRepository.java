@@ -34,10 +34,11 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
 
     /**
      * 查询该年份下发布过博客的所有月份
+     * 注意sql语句中不能使用%M 因为jpa似乎不能对%M得到的英文的月份进行排序
      * @param year 需要查询的年份
      * @return 月份的List集合
      */
-    @Query("select function('date_format', b.createTime, '%M') as month " +
+    @Query("select function('date_format', b.createTime, '%c') as month " +
             "from Blog b where function('date_format', b.createTime, '%Y') = ?1 " +
             " order by month desc ")
     List<String> findGroupMonthByYear(String year);
@@ -49,7 +50,7 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
      * @param month 月份
      * @return 博客的List集合
      */
-    @Query("select b from Blog  b where function('date_format', b.createTime, '%Y') = ?1 and function('date_format', b.createTime, '%M') =?2 order by b desc")
+    @Query("select b from Blog  b where function('date_format', b.createTime, '%Y') = ?1 and function('date_format', b.createTime, '%c') =?2 order by b desc")
     List<Blog> findByYearAndMonth(String year, String month);
 
 }

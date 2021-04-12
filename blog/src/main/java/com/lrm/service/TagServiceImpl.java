@@ -62,6 +62,7 @@ public class TagServiceImpl implements TagService {
         return tagRepository.findAll(convertToList(ids));
     }
 
+    @Override
     public List<Long> convertToList(String ids) {
         List<Long> list = new ArrayList<>();
         if (!"".equals(ids) && ids != null) {
