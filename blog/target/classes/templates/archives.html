@@ -53,18 +53,33 @@
                 </div>
             </div>
         </div>
+
         <th:block th:each="item : ${archiveMap}">
             <h3 class="ui centered aligned header" th:text="${item.key}">2020</h3>
-            <div class="ui fluid vertical menu">
-                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
+            <th:block th:each="map : ${item.value}">
+                <h4 class="ui centered aligned header" th:text="${map.key}">2020</h4>
+                <div class="ui fluid vertical menu">
+                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${map.value}">
                     <span>
                         <i class="mini teal circle icon"></i>
                         <span th:text="${blog.title}">java学习路线</span>
                         <div class="ui teal basic left pointing label m-padded-tb-mini" th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}">9.3</div>
                     </span>
-                    <div class="ui orange basic left pointing label m-padded-tb-mini" th:text="${blog.flag}">原创</div>
-                </a>
-            </div>
+                        <div class="ui orange basic left pointing label m-padded-tb-mini" th:text="${blog.flag}">原创</div>
+                    </a>
+                </div>
+            </th:block>
+
+<!--            <div class="ui fluid vertical menu">-->
+<!--                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">-->
+<!--                    <span>-->
+<!--                        <i class="mini teal circle icon"></i>-->
+<!--                        <span th:text="${blog.title}">java学习路线</span>-->
+<!--                        <div class="ui teal basic left pointing label m-padded-tb-mini" th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}">9.3</div>-->
+<!--                    </span>-->
+<!--                    <div class="ui orange basic left pointing label m-padded-tb-mini" th:text="${blog.flag}">原创</div>-->
+<!--                </a>-->
+<!--            </div>-->
         </th:block>
     </div>
 </div>
