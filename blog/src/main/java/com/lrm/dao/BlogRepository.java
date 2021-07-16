@@ -28,7 +28,7 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
      * @return  顺序返回年份List集合
      */
     @Query("select function('date_format', b.createTime, '%Y') as year " +
-            "from Blog b  order by year desc ")
+            "from Blog b order by year desc ")
     List<String> findGroupYear();
 
 

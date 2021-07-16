@@ -84,17 +84,18 @@ public class BlogServiceImpl implements BlogService {
     public Map<String, Map<String, List<Blog>>> archivesBlog() {
         List<String> years = blogRepository.findGroupYear();
         years = ProcessData.removeDupicateElement(years);
-        Map<String, Map<String, List<Blog>>> map = new HashMap<>(years.size());
+        //使用treeMap 别乱序了 且要求逆序排列
+        Map<String, Map<String, List<Blog>>> map = new TreeMap(Comparator.reverseOrder());
         for(String year : years)
         {
             List<String> months = blogRepository.findGroupMonthByYear(year);
-            Map<String, List<Blog>> hashMap = new HashMap<>(months.size());
             months = ProcessData.removeDupicateElement(months);
+            Map<String, List<Blog>> treeMap = new TreeMap<>(Comparator.reverseOrder());
             for (String month : months)
             {
-                hashMap.put(month, blogRepository.findByYearAndMonth(year, month));
+                treeMap.put(month, blogRepository.findByYearAndMonth(year, month));
             }
-            map.put(year, hashMap);
+            map.put(year, treeMap);
         }
         return map;
     }
