@@ -107,7 +107,7 @@
                         <td th:text="${blog.recommend}? '是' : '否'">是</td>
                         <td th:text="${blog.published}? '发布' : '草稿'">草稿</td>
 <!--                        直接在这里改-->
-                        <td th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd hh:MM:ss')}">2020-8-1 09:45</td>
+                        <td th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm:ss')}">2020-8-1 09:45</td>
                         <td>
                             <!--把字装在按钮样式里 用class=xx button -->
                             <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal button">编辑</a>

@@ -21,8 +21,10 @@ public class BlogApplication {
     public Connector httpConnector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
+        //部署http端口为80
         connector.setPort(80);
         connector.setSecure(false);
+        //http:80时跳转到443端口 即https端口
         connector.setRedirectPort(443);
         return connector;
     }
